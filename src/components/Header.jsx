@@ -1,15 +1,39 @@
-import logoImg from '../assets/logo.jpg';
+import { Profiler, useContext } from 'react';
 
-export default function Header(){
-    return(
-        <header id="main-header"> 
-            <div id="title">
-                <img sec={logoImg} alt='a restorent'/>
-                <h1>My Blog</h1>
-            </div>
-            <nav>
-                <button>Carty {0}</button>
-            </nav>
-        </header>
-    )
+import Button from './UI/Button.jsx';
+import logoImg from '../assets/logo.jpg';
+import CartContext from '../store/CartContext.jsx';
+import UserProgressContext from '../store/UserProgressContext.jsx';
+import LoginButton from './LoginButton.jsx';
+import LogoutButton from './LogoutButton.jsx';
+import Profile from './Profile.jsx';
+
+export default function Header() {
+  const cartCtx = useContext(CartContext);
+  const userProgressCtx = useContext(UserProgressContext);
+
+  const totalCartItems = cartCtx.items.reduce((totalNumberOfItems, item) => {
+    return totalNumberOfItems + item.quantity;
+  }, 0);
+
+  function handleShowCart() {
+    userProgressCtx.showCart();
+  }
+
+  return (
+    <header id="main-header">
+      <div id="title">
+        <img src={logoImg} alt="A restaurant" />
+        <h1>ReactFood</h1>
+      </div>
+      <nav>
+        <LoginButton/>
+        <LogoutButton/>
+        <Profile/>
+        <Button textOnly onClick={handleShowCart}>
+          Cart ({totalCartItems})
+        </Button>
+      </nav>
+    </header>
+  );
 }
