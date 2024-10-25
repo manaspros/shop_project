@@ -6,6 +6,7 @@ import Meals from './components/Meals.jsx';
 import { CartContextProvider } from './store/CartContext.jsx';
 import { UserProgressContextProvider } from './store/UserProgressContext.jsx';
 import SuccessPage from './components/SuccessPage.jsx';
+import BackendPage from './components/BackendPage.jsx';
 
 // Define your routes
 const router = createBrowserRouter([
@@ -14,13 +15,13 @@ const router = createBrowserRouter([
     element: <Meals />,
   },
   {
-    path: '/checkout',
-    element: <Checkout />,
-  },
-  {
     path: '/success',
     element: <SuccessPage />, // Replace with your actual Success Page component
   },
+  {
+    path: '/backends',
+    element: <BackendPage />, // Replace with your actual Backend Page component
+  }
 ]);
 
 function App() {
@@ -28,7 +29,6 @@ function App() {
     <UserProgressContextProvider>
       <CartContextProvider>
         <Header />
-        <Meals/>
         <RouterProvider router={router} />
         <Cart />
         <Checkout/>

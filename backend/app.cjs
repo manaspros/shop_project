@@ -26,6 +26,17 @@ app.get('/meals', async (req, res) => {
   }
 });
 
+
+app.get('/orderget', async (req, res) => {
+  try {
+    const meals = await fs.readFile('./data/orders.json', 'utf8');
+    res.json(JSON.parse(meals));
+  } catch (error) {
+    res.status(500).json({ message: 'Error reading meals data.' });
+  }
+});
+
+
 app.post('/orders', async (req, res) => {
   const orderData = req.body.order;
 

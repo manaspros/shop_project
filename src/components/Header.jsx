@@ -1,5 +1,7 @@
 import { Profiler, useContext ,  useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Button from './UI/Button.jsx';
 import logoImg from '../assets/logo.jpg';
 import CartContext from '../store/CartContext.jsx';
@@ -34,7 +36,7 @@ export default function Header() {const cartCtx = useContext(CartContext);
   <header id="main-header">
   <div id="title">
     <img src={logoImg} alt="A restaurant" />
-    <h1>ReactFood</h1>
+    <h1>Tandoori Club</h1>
   </div>
   <nav>
     <LoginButton/>
@@ -46,7 +48,7 @@ export default function Header() {const cartCtx = useContext(CartContext);
   <header id="main-header">
   <div id="title">
     <img src={logoImg} alt="A restaurant" />
-    <h1>ReactFood</h1>
+    <h1>Tandoori Club</h1>
   </div>
   <nav>
     
@@ -63,7 +65,6 @@ export default function Header() {const cartCtx = useContext(CartContext);
                 <img src={user?.picture} alt="User Profile" />
                 <div className="info">
                   <h2>{user?.given_name}</h2>
-                  <p>{user?.email}</p>
                 </div>
               </div>
   
@@ -75,7 +76,7 @@ export default function Header() {const cartCtx = useContext(CartContext);
               <ul>
                 <li>
                   <img src="images/setting.png" alt="Settings" />
-                  <a href="#">Setting</a>
+                  <a href="#">Orders</a>
                     
                 </li>
                 <li>
