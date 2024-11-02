@@ -11,10 +11,12 @@ app.use(express.static('public'));
 // CORS configuration
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE'); // Added DELETE method
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+
+
 
 // Get available meals
 app.get('/meals', async (req, res) => {
@@ -124,7 +126,8 @@ app.get('/success', async (req, res) => {
       allSuccessOrders.push(paymentData);
       await fs.writeFile('./data/success.json', JSON.stringify(allSuccessOrders));
       
-      res.status(200).json({ message: 'Payment recorded successfully!' });
+      
+      res.redirect(`http://localhost:5173/success?payment=success`);
     } else {
       res.status(400).json({ message: 'Payment not completed' });
     }
@@ -139,6 +142,27 @@ app.get('/success', (req, res) => {
   res.sendFile(__dirname + '/src/components/success.jsx'); // Adjust this path
 });
 
+// Delete an order by ID
+// CORS configuration
+
+// DELETE route to remove an order by ID
+app.delete('/orders/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const orders = await fs.readFile('./data/orders.json', 'utf8');
+    const allOrders = JSON.parse(orders);
+    const updatedOrders = allOrders.filter(order => order.id !== id); // Filter out the order to delete
+
+    await fs.writeFile('./data/orders.json', JSON.stringify(updatedOrders));
+    res.status(200).json({ message: 'Order deleted successfully.' });
+  } catch (error) {
+    console.error('Error deleting order:', error);
+    res.status(500).json({ message: 'Error deleting the order.' });
+  }
+});
+
+
 
 // Catch-all route for undefined routes
 app.use((req, res) => {
@@ -152,3 +176,5 @@ app.use((req, res) => {
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
 });
+
+

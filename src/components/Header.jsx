@@ -36,7 +36,9 @@ export default function Header() {const cartCtx = useContext(CartContext);
   <header id="main-header">
   <div id="title">
     <img src={logoImg} alt="A restaurant" />
+    <Link to="/">
     <h1>Tandoori Club</h1>
+    </Link>
   </div>
   <nav>
     <LoginButton/>
@@ -48,7 +50,9 @@ export default function Header() {const cartCtx = useContext(CartContext);
   <header id="main-header">
   <div id="title">
     <img src={logoImg} alt="A restaurant" />
+    <Link to="/">
     <h1>Tandoori Club</h1>
+    </Link>
   </div>
   <nav>
     
@@ -76,12 +80,12 @@ export default function Header() {const cartCtx = useContext(CartContext);
               <ul>
                 <li>
                   <img src="images/setting.png" alt="Settings" />
-                  <a href="#">Orders</a>
+                  <Link to="/backends">Orders</Link>
                     
                 </li>
                 <li>
                   <img src="images/help.png" alt="Help" />
-                  <a href="#">Help</a>
+                  <Link to="/explain">Help</Link>
                 </li>
                 <li>
                   <img src="images/logout.png" alt="Logout" />
