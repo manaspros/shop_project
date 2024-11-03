@@ -25,9 +25,13 @@ export default function Meals() {
 
   return (
     <ul id="meals">
-      {loadedMeals.map((meal) => (
-        <MealItem key={meal.id} meal={meal} />
-      ))}
+      {loadedMeals.length > 0 ? (
+        loadedMeals.map((meal) => (
+          <MealItem key={meal._id} meal={meal} /> // Use _id from MongoDB
+        ))
+      ) : (
+        <p>No meals found.</p> // Show a message if there are no meals
+      )}
     </ul>
-  );
+  );  
 }
