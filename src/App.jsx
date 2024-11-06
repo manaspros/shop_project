@@ -65,7 +65,7 @@ function App() {
       <FollowerPointerCard 
       >
         {/* Main Content */}
-        <div style={{ visibility: loading ? 'hidden' : 'visible' }}>
+        <div>
           <RouterProvider router={router} />
           <Cart />
           <Checkout />
